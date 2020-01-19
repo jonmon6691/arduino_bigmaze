@@ -90,4 +90,4 @@ struct level levels[] = {
 	{ .w = 32, .h = 32, .row_size = 8, .level_offset = 148},
 };
 
-#endif // ifndef levels_h
+#endif // #ifnedef LEVELS_H

@@ -7,6 +7,7 @@
 #ifndef ARDUINO
 #define ARDUINO 10810
 #endif
+
 #include "Adafruit_LEDBackpack.h"
 #include "levels.h"
 #include <avr/pgmspace.h>
@@ -14,7 +15,7 @@
 Adafruit_BicolorMatrix matrix = Adafruit_BicolorMatrix();
 
 // Controller buttons' pin numbers
-// Must be sequential because my debounce code is lazy, ¯\_(ツ)_/¯
+// Has to be sequential because the debounce code is lazy, ¯\_(ツ)_/¯
 #define RB (14)
 #define DB (15)
 #define UB (16)
@@ -29,7 +30,7 @@ Adafruit_BicolorMatrix matrix = Adafruit_BicolorMatrix();
 uint8_t db[4] = {0};
 void on_button(int pin, int debounce, void (*callback)())
 {
-  if(!digitalRead(pin)) {
+  if (!digitalRead(pin)) {
     if (!db[pin%4]) {
       db[pin%4] = debounce;
       callback();
@@ -92,8 +93,7 @@ bool check(uint8_t direction)
 void move_up()
 {
   if (!check(NORTH)) return;
-
-  if(you.y > DZ_LO) { // creates a board movement deadzone
+  if (you.y > DZ_LO) { // creates a board movement deadzone
     you.y--;
   } else if (board.y > 0) {
     board.y--;
@@ -106,8 +106,7 @@ void move_up()
 void move_down()
 {
   if (!check(SOUTH)) return;
-
-  if(you.y < DZ_HI) {
+  if (you.y < DZ_HI) {
     you.y++;
   } else if (board.y < maze.h*2 - 7) {
     board.y++;
@@ -120,8 +119,7 @@ void move_down()
 void move_left()
 {
   if (!check(WEST)) return;
-
-  if(you.x > DZ_LO) {
+  if (you.x > DZ_LO) {
     you.x--;
   } else if (board.x > 0) {
     board.x--;
@@ -134,8 +132,7 @@ void move_left()
 void move_right()
 {
   if (!check(EAST)) return;
-
-  if(you.x < DZ_HI) {
+  if (you.x < DZ_HI) {
     you.x++;
   } else if (board.x < maze.w*2 - 7) {
     board.x++;
@@ -143,8 +140,7 @@ void move_right()
     you.x++;
     if (you.x == 7) {
       // WINNER!
-      board.color = LED_GREEN;
-      you.color = LED_GREEN;
+      board.color = you.color;
       update_screen();
       delay(1000);
       current_level = (current_level + 1) % N_LEVELS;
@@ -155,7 +151,8 @@ void move_right()
   update_screen();
 }
 
-void update_screen() {
+void update_screen()
+{
   matrix.clear();
   draw_maze(board.x, board.y, board.color);
   matrix.drawPixel(you.x, you.y, you.color);
@@ -198,7 +195,8 @@ void draw_maze(int x, int y, int color)
   }
 }
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   Serial.println("bigmaze!");
   
@@ -226,7 +224,8 @@ void setup() {
   update_screen();
 }
 
-void loop() {
+void loop()
+{
   // Polling loop
   on_button(UB, 5, move_up);
   on_button(DB, 5, move_down);
