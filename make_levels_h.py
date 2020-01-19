@@ -49,4 +49,4 @@ for (w, h, data), offset in zip(levels, offsets):
     row_size = ceil(len(data) / h / 4)
     f.write(f"\t{{ .w = {w}, .h = {h}, .row_size = {row_size}, .level_offset = {offset}}},\n")
 
-f.write("};\n\n#endif //maze_h")
+f.write("};\n\n#endif // ifnedef levels_h")
