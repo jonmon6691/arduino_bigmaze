@@ -1,7 +1,13 @@
 # arduino_bigmaze
 A fun maze game for an arduino with an 8x8 display!
 
-![hardware](hardware.jpg)
+![movie](img/maze.gif)
+
+![movie](img/front.jpg)
+
+![movie](img/back.jpg)
+
+
 
 Game notes:
  - You can progress through an arbitrary number of pre-defined levels
