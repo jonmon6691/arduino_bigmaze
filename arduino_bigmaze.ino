@@ -3,11 +3,6 @@
  *          Jon Wallace 2020
  */
 
-// Hack to make intellisence happy
-#ifndef ARDUINO
-#define ARDUINO 10810
-#endif
-
 #include <Arduino.h>
 #include <avr/pgmspace.h>
 #include "Adafruit_LEDBackpack.h"
