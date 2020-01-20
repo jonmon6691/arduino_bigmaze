@@ -8,9 +8,10 @@
 #define ARDUINO 10810
 #endif
 
+#include <Arduino.h>
+#include <avr/pgmspace.h>
 #include "Adafruit_LEDBackpack.h"
 #include "levels.h"
-#include <avr/pgmspace.h>
 
 Adafruit_BicolorMatrix matrix = Adafruit_BicolorMatrix();
 
@@ -199,6 +200,7 @@ void setup()
 {
   Serial.begin(115200);
   Serial.println("bigmaze!");
+  Serial.println(_AVR_IOXXX_H_);
   
   pinMode(RB, INPUT_PULLUP);
   pinMode(DB, INPUT_PULLUP);
@@ -207,7 +209,7 @@ void setup()
   
   // Screen setup
   matrix.begin(0x70);
-  matrix.setBrightness(10);
+  matrix.setBrightness(6);
 
   // My screen is soldered in the "1" direction
   matrix.setRotation(1);
